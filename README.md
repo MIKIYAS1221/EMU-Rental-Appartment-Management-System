@@ -1,3 +1,2 @@
-# EMU-Rental-Appartment-Management-System
-
-Rental project
+# Apartment-rental-management-system
+"rental
