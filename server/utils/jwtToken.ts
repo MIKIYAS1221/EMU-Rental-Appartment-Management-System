@@ -1,4 +1,4 @@
-import { IUser } from '../models/User';
+import { IUser } from '../model/user';
 import { Response } from 'express';
 
 // Create and send token and save in the cookie.
