@@ -9,7 +9,7 @@ const sendToken = (user: IUser, statusCode: number, res: Response): void => {
   // Options for cookie
   const options = {
     expires: new Date(
-      Date.now() + parseInt(process.env.COOKIE_EXPIRES_TIME || '7', 10) * 24 * 60 * 60 * 1000
+      Date.now() + parseInt('7', 10) * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
   };

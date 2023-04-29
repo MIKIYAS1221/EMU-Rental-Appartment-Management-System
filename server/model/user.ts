@@ -3,18 +3,23 @@ import validator from 'validator';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import * as dotenv from 'dotenv';
 
-interface Avatar {
-  public_id: string
-  url: string
-}
+dotenv.config();
+
+// interface Avatar {
+//   public_id: string
+//   url: string
+// }
 
 export interface IUser extends Document {
-  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
-  avatar: Avatar;
+  // avatar: Avatar;
   role: 'tenant' | 'manager' | 'owner' | 'security guard';
+  dateOfBirth: Date;
   createdAt: Date;
   resetPasswordToken?: string;
   resetPasswordExpire?: Date;
@@ -25,10 +30,15 @@ export interface IUser extends Document {
 
 
 const userSchema: Schema = new Schema({
-  name: {
+  firstname: {
     type: String,
-    required: [true, 'Name is required'],
-    maxLength: [50, "Name can't be more than 50 characters"],
+    required: [true, 'First name is required'],
+    maxlength: [30, 'First name cannot exceed 30 characters'],
+  },
+  lastname: {
+    type: String,
+    required: [true, 'Last name is required'],
+    maxlength: [30, 'Last name cannot exceed 30 characters'],
   },
   email: {
     type: String,
@@ -42,16 +52,16 @@ const userSchema: Schema = new Schema({
     minlength: [6, 'Password must be at least 6 characters'],
     select: false,
   },
-  avatar: {
-    public_id: {
-      type: String,
-      required: true,
-    },
-    url: {
-      type: String,
-      required: true,
-    },
-  },
+  // avatar: {
+  //   public_id: {
+  //     type: String,
+  //     required: true,
+  //   },
+    // url: {
+    //   type: String,
+    //   required: true,
+    // },
+  // },
   role: {
     type: String,
     enum: ['tenant', 'manager', 'owner', 'security guard'],
@@ -61,6 +71,7 @@ const userSchema: Schema = new Schema({
     type: Date,
     default: Date.now,
   },
+  dateOfBirth: { type: Date, required: true },
   resetPasswordToken: {
     type: String,
   },
